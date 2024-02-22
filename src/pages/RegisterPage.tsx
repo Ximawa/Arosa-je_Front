@@ -1,43 +1,30 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
-
+import { Link } from "react-router-dom";
 import BtnNext from "../components/BtnNextBlue";
 
 // TODO : separer les forms en composant
-const LoginPage = () => {
+const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [full_name, setFullName] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const formData = new FormData();
-      formData.append("username", username);
-
-      // Hacher le mot de passe avant de l'envoyer
       const hashedPassword = await bcrypt.hash(password, 10);
-      formData.append("password", hashedPassword);
+      const response = await axios.post("http://127.0.0.1:8000/register", {
+        username,
+        hashed_password: hashedPassword,
+        email,
+        full_name,
+      });
 
-      const response = await axios.post(
-        "http://127.0.0.1:8000/login",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      const { access_token } = response.data;
-      localStorage.setItem("jwtToken", access_token);
-
-      // Rediriger vers '/dashboard'
-      navigate("/dashboard");
+      console.log(response.data);
     } catch (error) {
       setError("Erreur lors de la connexion. Veuillez réessayer.");
       console.error("Erreur lors de la connexion:", error);
@@ -53,6 +40,24 @@ const LoginPage = () => {
           <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
             <form onSubmit={handleSubmit}>
               <div className="px-5 py-7">
+                <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                  Email
+                </label>
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                />
+                <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                  Nom complet
+                </label>
+                <input
+                  type="text"
+                  value={full_name}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                />
                 <label className="font-semibold text-sm text-gray-600 pb-1 block">
                   Username
                 </label>
@@ -92,10 +97,8 @@ const LoginPage = () => {
                         d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
                       />
                     </svg>
-                    <Link to="/register">
-                      <span className="inline-block ml-1">
-                        Creation de compte
-                      </span>
+                    <Link to="/login">
+                      <span className="inline-block ml-1">Connexion</span>
                     </Link>
                   </button>
                 </div>
@@ -108,4 +111,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
