@@ -1,41 +1,60 @@
 import axios from "axios";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getJWTData } from "../utils/jwtUtils";
 
 const NewListing = () => {
+  const [id_user, setIdUser] = useState(-1);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [filePreview, setFilePreview] = useState<string | null>(null);
+  //const [filePreview, setFilePreview] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    // Récupérez les données du JWT
+    const jwtData = getJWTData();
+
+    if (jwtData) {
+      // Accédez aux données du JWT
+      setIdUser(jwtData.id);
+    }
+  }, []);
+
+  const handleFileChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const file = e.currentTarget.files?.[0] || null;
+    setFile(file);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("start_date", startDate);
-    formData.append("end_date", endDate);
-    if (file) {
-      formData.append("file", file);
-    }
 
     try {
       const jwtToken = localStorage.getItem("jwtToken");
       const response = await axios.post(
         "http://127.0.0.1:8000/CreateListing",
-        formData,
+        {
+          id_user,
+          name,
+          description,
+          photo: file?.name,
+          start_date: startDate,
+          end_date: endDate,
+        },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${jwtToken}`,
           },
         }
       );
       console.log(response.data);
+      navigate("/dashboard/card");
     } catch (error) {
       setError("Erreur lors de la connexion. Veuillez réessayer.");
       console.error("Erreur lors de la connexion:", error);
@@ -146,7 +165,13 @@ const NewListing = () => {
             </p>
           </label>
 
-          <input id="dropzone-file" type="file" className="hidden" />
+          <input
+            id="dropzone-file"
+            name="dropzone-file"
+            type="file"
+            onChange={handleFileChange}
+            className="hidden"
+          />
         </div>
         <div>
           <button className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">

@@ -75,7 +75,7 @@ const Header = () => {
           <div className="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
             <div className="relative z-10 flex px-2 lg:px-2">
               <div className="flex flex-shrink-0 items-center">
-                {role === 0 ? "Botaniste" : "Particulier"}
+                {role === 1 ? "Botaniste" : "Particulier"}
               </div>
             </div>
 

@@ -2,8 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CardListing from "../components/CardListing";
 
+interface CardListing {
+  id: number;
+  name: string;
+  start_date: string;
+  end_date: string;
+}
+
 const Listing = () => {
-  const [listing, setListing] = useState<{ id: number }[]>([]);
+  const [listing, setListing] = useState<CardListing[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +37,14 @@ const Listing = () => {
         {listing.length === 0 ? (
           <p>No actual listing</p>
         ) : (
-          listing.map((item) => <CardListing key={item.id} />)
+          listing.map((item) => (
+            <CardListing
+              key={item.id}
+              name={item.name}
+              start_date={item.start_date}
+              end_date={item.end_date}
+            />
+          ))
         )}
       </div>
     </div>

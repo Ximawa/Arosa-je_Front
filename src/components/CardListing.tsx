@@ -1,4 +1,13 @@
-const CardListing = () => {
+interface Props {
+  name: string;
+  start_date: string;
+  end_date: string;
+}
+const CardListing: React.FC<Props> = ({
+  name,
+  start_date,
+  end_date,
+}: Props) => {
   return (
     <div className="w-full bg-white rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
       <div>
@@ -9,8 +18,10 @@ const CardListing = () => {
         />
       </div>
       <div className="text-center py-8 sm:py-6">
-        <p className="text-xl text-gray-700 font-bold mb-2">Dany Bailey</p>
-        <p className="text-base text-gray-400 font-normal">Software Engineer</p>
+        <p className="text-xl text-gray-700 font-bold mb-2">{name}</p>
+        <p className="text-base text-gray-400 font-normal">
+          De {start_date} a {end_date}
+        </p>
       </div>
     </div>
   );
