@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import { Link } from "react-router-dom";
 import BtnNext from "../components/BtnNextBlue";
 import SelectInput from "../components/SelectInput";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo_arosaje.png";
 
 // TODO : separer les input form en composants
 const SignupPage = () => {
@@ -52,58 +52,74 @@ const SignupPage = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-custom-cream flex flex-col justify-center sm:py-12">
-        <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <h1 className="font-bold text-center text-2xl mb-5">
-            <img src={logo} alt="Logo de l'application" />
-          </h1>
+      <div className="min-h-screen bg-custom-dark-green flex flex-col ">
+        <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md lg:max-w-xl">
+          <div>
+            <img
+              src={logo}
+              alt="Logo de l'application"
+              className="object-cover mx-auto"
+            />
+          </div>
           {error && <p style={{ color: "red" }}>{error}</p>}
-          <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+          <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200 ">
             <form onSubmit={handleSubmit}>
-              <div className="px-5 py-7">
-                <label className="font-semibold text-sm text-gray-600 pb-1 block">
-                  Email
-                </label>
-                <input
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                />
-                <label className="font-semibold text-sm text-gray-600 pb-1 block">
-                  Nom complet
-                </label>
-                <input
-                  type="text"
-                  value={full_name}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                />
-                <SelectInput
-                  htmlFor="role"
-                  label="Choissisez un role"
-                  options={roles}
-                  onChange={(e) => setIdRole(e.target.value)}
-                />
-                <label className="font-semibold text-sm text-gray-600 pb-1 block">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                />
-                <label className="font-semibold text-sm text-gray-600 pb-1 block">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                />
-                <BtnNext>Next</BtnNext>
+              <div className="px-5 py-7 grid grid-cols-2 gap-2">
+                <div>
+                  <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                    Nom complet
+                  </label>
+                  <input
+                    type="text"
+                    value={full_name}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <SelectInput
+                    htmlFor="role"
+                    label="Choissisez un role"
+                    options={roles}
+                    onChange={(e) => setIdRole(e.target.value)}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <BtnNext>Creer votre compte</BtnNext>
+                </div>
               </div>
             </form>
             <div className="py-5">

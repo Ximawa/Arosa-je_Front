@@ -6,7 +6,7 @@ const BtnNext = ({ children }: Props) => {
     <>
       <button
         type="submit"
-        className="transition duration-200 bg-custom-dark-green hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
+        className="transition duration-200 bg-custom-dark-green hover:bg-custom-light-green hover:text-black focus:bg-custom-light-green focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
       >
         <span className="inline-block mr-2">{children}</span>
         <svg

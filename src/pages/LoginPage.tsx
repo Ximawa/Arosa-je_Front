@@ -4,7 +4,7 @@ import axios from "axios";
 import bcrypt from "bcryptjs";
 
 import BtnNext from "../components/BtnNextBlue";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo_arosaje.png";
 
 // TODO : separer les forms en composant
 const LoginPage = () => {
@@ -48,11 +48,15 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-custom-cream flex flex-col justify-center sm:py-12">
-        <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <h1 className="font-bold text-center text-2xl mb-5">
-            <img src={logo} alt="Logo de l'application" />
-          </h1>
+      <div className="min-h-screen bg-custom-dark-green flex flex-col sm:py-12">
+        <div className="p-6 xs:p-0 mx-auto md:w-full md:max-w-md">
+          <div>
+            <img
+              src={logo}
+              alt="Logo de l'application"
+              className="object-cover mx-auto"
+            />
+          </div>
           {error && <p style={{ color: "red" }}>{error}</p>}
           <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
             <form onSubmit={handleSubmit}>
