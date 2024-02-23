@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CardListing from "../components/CardListing";
+import BtnLightGreen from "../components/BtnLightGreen";
+import { useNavigate } from "react-router-dom";
 
 interface CardListing {
   id: number;
@@ -8,9 +10,13 @@ interface CardListing {
   start_date: string;
   end_date: string;
 }
-
 const Listing = () => {
   const [listing, setListing] = useState<CardListing[]>([]);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/dashboard/new"); // Replace "/some-path" with the desired path to redirect to
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +39,8 @@ const Listing = () => {
 
   return (
     <div className="container px-6 py-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <BtnLightGreen onClick={handleClick}>Ajouter une annonce</BtnLightGreen>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
         {listing.length === 0 ? (
           <p>No actual listing</p>
         ) : (

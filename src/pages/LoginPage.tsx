@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 
-import BtnNext from "../components/BtnNextBlue";
+import BtnNext from "../components/BtnNextDarkGreen";
 import logo from "../assets/logo_arosaje.png";
 
 // TODO : separer les forms en composant

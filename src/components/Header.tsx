@@ -26,7 +26,7 @@ const Header = () => {
     setIsVisible((prevState) => !prevState);
   };
   return (
-    <header className="bg-custom-dark-green">
+    <header className="bg-custom-dark-green min-h-[4rem] sticky top-0 z-10 col-[1/-1] row-[1] text-gray border-b-2 border-custom-light-brown">
       <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-teal-700 lg:px-8">
         <div className="relative flex h-16 justify-between">
           <div className="relative z-10 flex px-2 lg:px-0">

@@ -4,7 +4,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   // TODO transformer les elements de la sidebar en composant
   return (
-    <div className="relative flex flex-col bg-clip-border bg-custom-light-brown text-gray-700 h-full w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+    <div className="max-h-screen xl:sticky lg:static top-12 col-[1] row-[2] border-b border-gray-200 bg-custom-light-brown xl:border-b-0 xl:border-r xl:border-gray-200">
       <nav className="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
         <div
           role="button"
@@ -31,54 +31,7 @@ const Sidebar = () => {
           </div>
           Annonces en cours
         </div>
-        <div
-          role="button"
-          onClick={() => {
-            navigate("/dashboard/new");
-          }}
-          className="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none"
-        >
-          <div className="grid place-items-center mr-4">
-            <svg
-              className="w-6 h-6 text-gray-800 dark:text-black"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 7.8v8.4M7.8 12h8.4m4.8 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          </div>
-          Ajouter une annonce
-        </div>
-        <div
-          role="button"
-          className="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none"
-        >
-          <div className="grid place-items-center mr-4">
-            <svg
-              className="w-6 h-6 text-gray-800 dark:text-black"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2c.6 0 1-.4 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </div>
-          Conseils
-          <div className="grid place-items-center ml-auto justify-self-end"></div>
-        </div>
+
         <div
           role="button"
           className="flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-blue-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none"

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { Link } from "react-router-dom";
-import BtnNext from "../components/BtnNextBlue";
+import BtnNext from "../components/BtnNextDarkGreen";
 import SelectInput from "../components/SelectInput";
 import logo from "../assets/logo_arosaje.png";
 

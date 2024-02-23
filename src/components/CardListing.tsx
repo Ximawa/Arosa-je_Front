@@ -42,7 +42,7 @@ const CardListing: React.FC<Props> = ({
   }, []);
 
   return (
-    <div className="w-full bg-custom-dark-green rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
+    <div className="w-full bg-custom-dark-green border-2 border-custom-light-brown rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
       <div>
         {imageSrc ? (
           <img src={imageSrc} alt={`Image ${id}`} />
