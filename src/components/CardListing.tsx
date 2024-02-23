@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import BtnLightBrown from "./BtnLightBrown";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   id: number;
@@ -14,6 +16,11 @@ const CardListing: React.FC<Props> = ({
   end_date,
 }: Props) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const HandleClick = (id: number) => {
+    navigate(`/dashboard/card/${id}`);
+  };
 
   useEffect(() => {
     const getImage = async () => {
@@ -42,7 +49,7 @@ const CardListing: React.FC<Props> = ({
   }, []);
 
   return (
-    <div className="w-full bg-custom-dark-green border-2 border-custom-light-brown rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
+    <div className="w-full bg-custom-dark-green border-2 border-custom-light-brown p-4 rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
       <div>
         {imageSrc ? (
           <img src={imageSrc} alt={`Image ${id}`} />
@@ -56,6 +63,7 @@ const CardListing: React.FC<Props> = ({
           Du {start_date} au {end_date}
         </p>
       </div>
+      <BtnLightBrown onClick={() => HandleClick(id)}>Voir plus</BtnLightBrown>
     </div>
   );
 };

@@ -94,7 +94,7 @@ const NewListing = () => {
   };
 
   return (
-    <div className="mx-auto mt-4 w-full max-w-[550px]">
+    <div className="mx-auto mt-4 w-full overflow-hidden max-w-[550px]">
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form action="https://formbold.com/s/FORM_ID" onSubmit={handleSubmit}>
         <div className="mb-5">
