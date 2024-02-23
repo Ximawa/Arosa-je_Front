@@ -40,6 +40,7 @@ const Listing = () => {
           listing.map((item) => (
             <CardListing
               key={item.id}
+              id={item.id}
               name={item.name}
               start_date={item.start_date}
               end_date={item.end_date}

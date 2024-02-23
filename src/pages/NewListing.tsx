@@ -10,7 +10,8 @@ const NewListing = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [file, setFile] = useState<File | null>(null);
-  //const [filePreview, setFilePreview] = useState<string | null>(null);
+
+  const [folderName, setFolderName] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -26,9 +27,10 @@ const NewListing = () => {
     }
   }, []);
 
-  const handleFileChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files?.[0] || null;
-    setFile(file);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setFile(event.target.files[0]);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,10 +55,40 @@ const NewListing = () => {
           },
         }
       );
+
       console.log(response.data);
-      navigate("/dashboard/card");
+      setFolderName(response.data.id);
+
+      if (file && response.data.id) {
+        // Check if file and folderName are defined
+        const formData = new FormData();
+        formData.append("file", file);
+        try {
+          const uploadResponse = await fetch(
+            `http://127.0.0.1:8000/upload/${response.data.id}`,
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+
+          if (!uploadResponse.ok) {
+            throw new Error(
+              `Erreur HTTP : ${uploadResponse.status} - ${uploadResponse.statusText}`
+            );
+          }
+
+          console.log("Fichier envoyé avec succès.");
+          navigate("/dashboard/card");
+        } catch (error) {
+          setError("Erreur lors de l'envoie de la photo");
+          console.error("Erreur lors de l'envoi du fichier :", error);
+        }
+      } else {
+        console.error("File or folderName is not defined.");
+      }
     } catch (error) {
-      setError("Erreur lors de la connexion. Veuillez réessayer.");
+      setError("Erreur lors de la creation de l'annonce");
       console.error("Erreur lors de la connexion:", error);
     }
   };
@@ -93,7 +125,7 @@ const NewListing = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Descriptif..."
           ></textarea>
         </div>

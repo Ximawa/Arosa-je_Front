@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { Link } from "react-router-dom";
 import BtnNext from "../components/BtnNextBlue";
 import SelectInput from "../components/SelectInput";
+import logo from "../assets/logo.png";
 
 // TODO : separer les input form en composants
 const SignupPage = () => {
@@ -51,9 +52,11 @@ const SignupPage = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
+      <div className="min-h-screen bg-custom-cream flex flex-col justify-center sm:py-12">
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-          <h1 className="font-bold text-center text-2xl mb-5">Your Logo</h1>
+          <h1 className="font-bold text-center text-2xl mb-5">
+            <img src={logo} alt="Logo de l'application" />
+          </h1>
           {error && <p style={{ color: "red" }}>{error}</p>}
           <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
             <form onSubmit={handleSubmit}>

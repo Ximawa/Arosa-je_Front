@@ -4,7 +4,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   // TODO transformer les elements de la sidebar en composant
   return (
-    <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h-[calc(100vh-4rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+    <div className="relative flex flex-col bg-clip-border bg-custom-light-brown text-gray-700 h-full w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
       <nav className="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
         <div
           role="button"

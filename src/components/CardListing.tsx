@@ -1,26 +1,59 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 interface Props {
+  id: number;
   name: string;
   start_date: string;
   end_date: string;
 }
 const CardListing: React.FC<Props> = ({
+  id,
   name,
   start_date,
   end_date,
 }: Props) => {
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/get_image/${id}`,
+          {
+            responseType: "arraybuffer",
+          }
+        );
+        const blob = new Blob([response.data], { type: "image/*" });
+        setImageSrc(URL.createObjectURL(blob));
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+
+    getImage();
+
+    // Clean up
+    return () => {
+      if (imageSrc) {
+        URL.revokeObjectURL(imageSrc);
+      }
+    };
+  }, []);
+
   return (
-    <div className="w-full bg-white rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
+    <div className="w-full bg-custom-dark-green rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
       <div>
-        <img
-          className="object-center object-cover h-auto w-full"
-          src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-          alt="photo"
-        />
+        {imageSrc ? (
+          <img src={imageSrc} alt={`Image ${id}`} />
+        ) : (
+          <p>Loading image...</p>
+        )}
       </div>
       <div className="text-center py-8 sm:py-6">
         <p className="text-xl text-gray-700 font-bold mb-2">{name}</p>
         <p className="text-base text-gray-400 font-normal">
-          De {start_date} a {end_date}
+          Du {start_date} au {end_date}
         </p>
       </div>
     </div>
