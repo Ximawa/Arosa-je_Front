@@ -38,7 +38,7 @@ const LoginPage = () => {
 
       // Rediriger vers '/dashboard'
       console.log(response.data);
-      navigate("/dashboard/");
+      navigate("/dashboard/card");
     } catch (error) {
       setError("Erreur lors de la connexion. Veuillez réessayer.");
       console.error("Erreur lors de la connexion:", error);

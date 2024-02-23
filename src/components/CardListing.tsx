@@ -1,53 +1,16 @@
 const CardListing = () => {
   return (
-    <div className="w-full md:w-1/2 xl:w-1/3 px-4">
-      <div className="bg-white rounded-lg overflow-hidden mb-10">
+    <div className="w-full bg-white rounded-lg sahdow-lg overflow-hidden flex flex-col justify-center items-center">
+      <div>
         <img
-          src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-01.jpg"
-          alt="image"
-          className="w-full"
+          className="object-center object-cover h-auto w-full"
+          src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+          alt="photo"
         />
-        <div className="p-8 sm:p-9 md:p-7 xl:p-9 text-center">
-          <h3>
-            <a
-              href="javascript:void(0)"
-              className="
-              font-semibold
-              text-dark text-xl
-              sm:text-[22px]
-              md:text-xl
-              lg:text-[22px]
-              xl:text-xl
-              2xl:text-[22px]
-              mb-4
-              block
-              hover:text-primary
-              "
-            >
-              50+ Best creative website themes & templates
-            </a>
-          </h3>
-          <p className="text-base text-body-color leading-relaxed mb-7">
-            Lorem ipsum dolor sit amet pretium consectetur adipiscing elit.
-            Lorem consectetur adipiscing elit.
-          </p>
-          <a
-            href="javascript:void(0)"
-            className="
-           inline-block
-           py-2
-           px-7
-           border border-[#E5E7EB]
-           rounded-full
-           text-base text-body-color
-           font-medium
-           hover:border-primary hover:bg-primary hover:text-white
-           transition
-           "
-          >
-            View Details
-          </a>
-        </div>
+      </div>
+      <div className="text-center py-8 sm:py-6">
+        <p className="text-xl text-gray-700 font-bold mb-2">Dany Bailey</p>
+        <p className="text-base text-gray-400 font-normal">Software Engineer</p>
       </div>
     </div>
   );

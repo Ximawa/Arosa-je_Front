@@ -8,7 +8,13 @@ const Listing = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/listing");
+        const jwtToken = localStorage.getItem("jwtToken");
+
+        const response = await axios.get("http://127.0.0.1:8000/listing", {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
         setListing(response.data);
       } catch (error) {
         console.error("Erreur lors de la récupération des rôles:", error);
@@ -19,17 +25,14 @@ const Listing = () => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="flex flex-wrap -mx-4">
+    <div className="container px-6 py-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {listing.length === 0 ? (
           <p>No actual listing</p>
         ) : (
           listing.map((item) => <CardListing key={item.id} />)
         )}
       </div>
-      {listing.map((item) => (
-        <CardListing key={item.id} />
-      ))}
     </div>
   );
 };
