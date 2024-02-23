@@ -37,7 +37,8 @@ const LoginPage = () => {
       localStorage.setItem("jwtToken", access_token);
 
       // Rediriger vers '/dashboard'
-      navigate("/dashboard");
+      console.log(response.data);
+      navigate("/dashboard/");
     } catch (error) {
       setError("Erreur lors de la connexion. Veuillez réessayer.");
       console.error("Erreur lors de la connexion:", error);
@@ -92,7 +93,7 @@ const LoginPage = () => {
                         d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
                       />
                     </svg>
-                    <Link to="/register">
+                    <Link to="/signup">
                       <span className="inline-block ml-1">
                         Creation de compte
                       </span>

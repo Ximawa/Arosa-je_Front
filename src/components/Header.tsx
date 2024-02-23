@@ -1,7 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getJWTData } from "../utils/jwtUtils";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [role, setRole] = useState(-1);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Récupérez les données du JWT
+    const jwtData = getJWTData();
+
+    if (jwtData) {
+      // Accédez aux données du JWT
+      setRole(jwtData.role);
+    }
+  }, []);
+
+  const logout = () => {
+    navigate("/logout");
+  };
 
   const toggleVisibilite = () => {
     // Inversion de l'état estVisible lors du clic
@@ -55,6 +73,12 @@ const Header = () => {
             </button>
           </div>
           <div className="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
+            <div className="relative z-10 flex px-2 lg:px-2">
+              <div className="flex flex-shrink-0 items-center">
+                {role === 0 ? "Botaniste" : "Particulier"}
+              </div>
+            </div>
+
             <button
               type="button"
               className="relative flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -122,7 +146,8 @@ const Header = () => {
                   Settings
                 </a>
                 <a
-                  href="#"
+                  href=""
+                  onClick={logout}
                   className="block px-4 py-2 text-sm text-yellow-600"
                   role="menuitem"
                   id="user-menu-item-2"

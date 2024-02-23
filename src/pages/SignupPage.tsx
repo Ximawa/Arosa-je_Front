@@ -1,16 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { Link } from "react-router-dom";
 import BtnNext from "../components/BtnNextBlue";
+import SelectInput from "../components/SelectInput";
 
-// TODO : separer les forms en composant
-const RegisterPage = () => {
+// TODO : separer les input form en composants
+const SignupPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [full_name, setFullName] = useState("");
+  const [id_role, setIdRole] = useState("");
   const [error, setError] = useState("");
+
+  const [roles, setRoles] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/roles");
+        setRoles(response.data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des rôles:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +39,7 @@ const RegisterPage = () => {
         hashed_password: hashedPassword,
         email,
         full_name,
+        id_role,
       });
 
       console.log(response.data);
@@ -57,6 +75,12 @@ const RegisterPage = () => {
                   value={full_name}
                   onChange={(e) => setFullName(e.target.value)}
                   className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                />
+                <SelectInput
+                  htmlFor="role"
+                  label="Choissisez un role"
+                  options={roles}
+                  onChange={(e) => setIdRole(e.target.value)}
                 />
                 <label className="font-semibold text-sm text-gray-600 pb-1 block">
                   Username
@@ -97,7 +121,7 @@ const RegisterPage = () => {
                         d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
                       />
                     </svg>
-                    <Link to="/login">
+                    <Link to="/">
                       <span className="inline-block ml-1">Connexion</span>
                     </Link>
                   </button>
@@ -111,4 +135,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default SignupPage;
