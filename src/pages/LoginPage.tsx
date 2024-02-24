@@ -22,7 +22,7 @@ const LoginPage = () => {
 
       // Hacher le mot de passe avant de l'envoyer
       const hashedPassword = await bcrypt.hash(password, 10);
-      formData.append("password", password);
+      formData.append("password", hashedPassword);
 
       const response = await axios.post(
         "http://127.0.0.1:8000/login",

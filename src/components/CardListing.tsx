@@ -58,7 +58,7 @@ const CardListing: React.FC<Props> = ({
         )}
       </div>
       <div className="text-center py-8 sm:py-6">
-        <p className="text-xl text-gray-700 font-bold mb-2">{name}</p>
+        <p className="text-xl text-custom-light-brown font-bold mb-2">{name}</p>
         <p className="text-base text-gray-400 font-normal">
           Du {start_date} au {end_date}
         </p>

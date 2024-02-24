@@ -49,8 +49,8 @@ const Listing = () => {
               key={item.id}
               id={item.id}
               name={item.name}
-              start_date={item.start_date}
-              end_date={item.end_date}
+              start_date={item.start_date.slice(0, -3).replace("T", " ")}
+              end_date={item.end_date.slice(0, -3).replace("T", " ")}
             />
           ))
         )}

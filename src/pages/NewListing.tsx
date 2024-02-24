@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getJWTData } from "../utils/jwtUtils";
 
+// TODO: ajouter preview img a upload
+
 const NewListing = () => {
   const [id_user, setIdUser] = useState(-1);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
   const [file, setFile] = useState<File | null>(null);
-
-  const [folderName, setFolderName] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -45,8 +45,8 @@ const NewListing = () => {
           name,
           description,
           photo: file?.name,
-          start_date: startDate,
-          end_date: endDate,
+          start_date: startDate?.toISOString().slice(0, -8).replace("T", " "),
+          end_date: endDate?.toISOString().slice(0, -8).replace("T", " "),
         },
         {
           headers: {
@@ -57,8 +57,6 @@ const NewListing = () => {
       );
 
       console.log(response.data);
-      setFolderName(response.data.id);
-
       if (file && response.data.id) {
         // Check if file and folderName are defined
         const formData = new FormData();
@@ -93,6 +91,7 @@ const NewListing = () => {
     }
   };
 
+  // TODO split en composant
   return (
     <div className="mx-auto mt-4 w-full overflow-hidden max-w-[550px]">
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -140,9 +139,9 @@ const NewListing = () => {
                 Date debut
               </label>
               <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
+                type="datetime-local"
+                value={startDate ? startDate.toISOString().slice(0, -8) : ""}
+                onChange={(e) => setStartDate(new Date(e.target.value))}
                 name="start_date"
                 id="start_date"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -158,9 +157,9 @@ const NewListing = () => {
                 Date fin
               </label>
               <input
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
+                type="datetime-local"
+                value={endDate ? endDate.toISOString().slice(0, -8) : ""}
+                onChange={(e) => setEndDate(new Date(e.target.value))}
                 name="end_date"
                 id="end_date"
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"

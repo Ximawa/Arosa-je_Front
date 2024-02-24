@@ -89,9 +89,13 @@ const DescListing: React.FC<Props> = ({ id }: Props) => {
           >
             <div className="flex items-center">
               <div className="text-sm ml-2">
-                <p className="text-black leading-none">Du {start_date}</p>
+                <p className="text-black leading-none">
+                  Du {start_date?.slice(0, -3).replace("T", " ")}
+                </p>
 
-                <p className="text-black">Au {end_date}</p>
+                <p className="text-black">
+                  Au {end_date?.slice(0, -3).replace("T", " ")}
+                </p>
               </div>
             </div>
           </a>
