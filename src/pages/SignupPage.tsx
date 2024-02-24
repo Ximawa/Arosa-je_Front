@@ -35,13 +35,22 @@ const SignupPage = () => {
 
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
-      const response = await axios.post("http://127.0.0.1:8000/register", {
-        username,
-        hashed_password: hashedPassword,
-        email,
-        full_name,
-        id_role,
-      });
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("full_name", full_name);
+      formData.append("id_role", id_role);
+      formData.append("hashed_password", hashedPassword);
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/register",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       console.log(response.data);
     } catch (error) {
