@@ -1,25 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import CardListing from "../components/CardListing";
-import BtnLightGreen from "../components/BtnLightGreen";
 import { useNavigate } from "react-router-dom";
+import BtnLightGreen from "../components/BtnLightGreen";
+import CardEncyclopedia from "../components/CardEncyclopedia";
 
-interface CardListing {
+interface CardEnclyclopdia {
   id: number;
   name: string;
   start_date: string;
   end_date: string;
 }
-const Listing = () => {
-  const [listing, setListing] = useState<CardListing[]>([]);
+
+const EncyclopediaPage = () => {
+  const [plantes, setPlantes] = useState<CardEnclyclopdia[]>([]);
   const navigate = useNavigate();
 
   const handleClickNew = () => {
-    navigate("/dashboard/new"); // Replace "/some-path" with the desired path to redirect to
+    navigate("/dashboard/encyclopedia/new"); // Replace "/some-path" with the desired path to redirect to
   };
 
   const HandleClick = (id: number) => {
-    navigate(`/dashboard/card/${id}`);
+    navigate(`/dashboard/encyclopedia/${id}`);
   };
 
   useEffect(() => {
@@ -27,14 +28,14 @@ const Listing = () => {
       try {
         const jwtToken = localStorage.getItem("jwtToken");
 
-        const response = await axios.get("http://127.0.0.1:8000/listing", {
+        const response = await axios.get("http://127.0.0.1:8000/plantes/", {
           headers: {
             Authorization: `Bearer ${jwtToken}`,
           },
         });
-        setListing(response.data);
+        setPlantes(response.data);
       } catch (error) {
-        console.error("Erreur lors de la récupération des annonces:", error);
+        console.error("Erreur lors de la récupération des plantes:", error);
       }
     };
 
@@ -43,24 +44,20 @@ const Listing = () => {
 
   return (
     <div className="container px-6 py-6">
-      <BtnLightGreen onClick={handleClickNew}>
-        Ajouter une annonce
-      </BtnLightGreen>
+      <BtnLightGreen onClick={handleClickNew}>Ajouter une plante</BtnLightGreen>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
-        {listing.length === 0 ? (
-          <p>No actual listing</p>
+        {plantes.length === 0 ? (
+          <p>Aucune plante presente dans l'encyclopedie</p>
         ) : (
-          listing.map((item) => (
-            <CardListing
+          plantes.map((item) => (
+            <CardEncyclopedia
               key={item.id}
               id={item.id}
               name={item.name}
-              start_date={item.start_date.slice(0, -3).replace("T", " ")}
-              end_date={item.end_date.slice(0, -3).replace("T", " ")}
               onClick={(id: number) => HandleClick(id)}
             >
               Voir plus
-            </CardListing>
+            </CardEncyclopedia>
           ))
         )}
       </div>
@@ -68,4 +65,4 @@ const Listing = () => {
   );
 };
 
-export default Listing;
+export default EncyclopediaPage;

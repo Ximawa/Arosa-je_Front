@@ -9,6 +9,9 @@ import Listing from "../pages/Listing";
 import NewListing from "../pages/NewListing";
 import InfoListing from "../pages/InfoListing";
 import ConvoListing from "../pages/ConvoListing";
+import ConvoListPage from "../pages/ConvoListPage.tsx";
+import NewEncyclopedia from "../pages/NewEncyclopedia.tsx";
+import EncyclopediaPage from "../pages/EncyclopediaPage.tsx";
 
 const Index: React.FC = () => {
   return (
@@ -23,6 +26,15 @@ const Index: React.FC = () => {
             <Route path="/dashboard/new" element={<NewListing />} />
             <Route path="/dashboard/card/:id" element={<InfoListing />} />
             <Route path="/dashboard/convo/:id" element={<ConvoListing />} />
+            <Route path="/dashboard/convo" element={<ConvoListPage />} />
+            <Route
+              path="/dashboard/encyclopedia"
+              element={<EncyclopediaPage />}
+            />
+            <Route
+              path="/dashboard/encyclopedia/new"
+              element={<NewEncyclopedia />}
+            />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

@@ -54,7 +54,11 @@ const DescListing: React.FC<Props> = ({ id }: Props) => {
     setProposalMsg("");
   }, []);
 
-  const handleClick = async () => {
+  const handleClickConvo = () => {
+    navigate(`/dashboard/convo/${id}`);
+  };
+
+  const handleClickCreate = async () => {
     const jwtToken = localStorage.getItem("jwtToken");
 
     const response = await axios.post(
@@ -179,10 +183,13 @@ const DescListing: React.FC<Props> = ({ id }: Props) => {
           {isVisible ? (
             <></>
           ) : (
-            <BtnLightBrown onClick={handleClick}>
+            <BtnLightBrown onClick={handleClickCreate}>
               Se porter volontaire
             </BtnLightBrown>
           )}
+          <BtnLightBrown onClick={handleClickConvo}>
+            Voir la conversation
+          </BtnLightBrown>
         </div>
       </div>
     </div>

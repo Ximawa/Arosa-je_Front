@@ -5,16 +5,12 @@ import BtnLightBrown from "./BtnLightBrown";
 interface Props {
   id: number;
   name: string;
-  start_date: string;
-  end_date: string;
   onClick: (id: number) => void;
   children: string;
 }
-const CardListing: React.FC<Props> = ({
+const CardEncyclopedia: React.FC<Props> = ({
   id,
   name,
-  start_date,
-  end_date,
   onClick,
   children,
 }: Props) => {
@@ -57,13 +53,10 @@ const CardListing: React.FC<Props> = ({
       </div>
       <div className="text-center py-8 sm:py-6">
         <p className="text-xl text-custom-light-brown font-bold mb-2">{name}</p>
-        <p className="text-base text-gray-400 font-normal">
-          Du {start_date} au {end_date}
-        </p>
       </div>
       <BtnLightBrown onClick={() => onClick(id)}>{children}</BtnLightBrown>
     </div>
   );
 };
 
-export default CardListing;
+export default CardEncyclopedia;
