@@ -8,6 +8,7 @@ import DashboardPage from "../pages/DashboardPage";
 import Listing from "../pages/Listing";
 import NewListing from "../pages/NewListing";
 import InfoListing from "../pages/InfoListing";
+import ConvoListing from "../pages/ConvoListing";
 
 const Index: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const Index: React.FC = () => {
             <Route path="/dashboard/card" element={<Listing />} />
             <Route path="/dashboard/new" element={<NewListing />} />
             <Route path="/dashboard/card/:id" element={<InfoListing />} />
+            <Route path="/dashboard/convo/:id" element={<ConvoListing />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

@@ -56,7 +56,6 @@ const NewListing = () => {
         }
       );
 
-      console.log(response.data);
       if (file && response.data.id) {
         // Check if file and folderName are defined
         const formData = new FormData();

@@ -1,5 +1,8 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import BtnLightBrown from "./BtnLightBrown";
+import { getJWTData } from "../utils/jwtUtils";
 
 interface Props {
   id: number;
@@ -12,13 +15,87 @@ const DescListing: React.FC<Props> = ({ id }: Props) => {
   const [start_date, setStartDate] = useState<string | null>(null);
   const [end_date, setEndDate] = useState<string | null>(null);
 
+  const [id_listing, setIdListing] = useState<number | null>(null);
+  const [proposer_id, setProposerId] = useState<number | null>(null);
+  const [proposal_msg, setProposalMsg] = useState<string | null>(null);
+
+  const [isVisible, setIsVisible] = useState<boolean | null>(true);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const jwtToken = localStorage.getItem("jwtToken");
+        const response = await axios.get(
+          `http://127.0.0.1:8000/get_proposal_created/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        if (response.data == null) {
+          setIsVisible(false);
+          console.log(isVisible);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des rôles:", error);
+      }
+    };
+
+    fetchData();
+    const jwtData = getJWTData();
+
+    if (jwtData) {
+      setProposerId(jwtData.id);
+    }
+    setIdListing(id);
+    setProposalMsg("");
+  }, []);
+
+  const handleClick = async () => {
+    const jwtToken = localStorage.getItem("jwtToken");
+
+    const response = await axios.post(
+      "http://127.0.0.1:8000/createProposal",
+      {
+        id_listing,
+        proposer_id,
+        proposal_msg,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      }
+    );
+
+    if (response.data) {
+      const reponse_convo = await axios.post(
+        "http://127.0.0.1:8000/createConversation",
+        {
+          proposal_id: response.data.id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
+
+      navigate(`/dashboard/convo/${reponse_convo.data.id}`);
+    }
+  };
+
   useEffect(() => {
     const getInfo = async () => {
       try {
         const response = await axios.get(
           `http://127.0.0.1:8000/get_listing/${id}`
         );
-        console.log(response.data);
         setTitles(response.data.name);
         setDescription(response.data.description);
         setStartDate(response.data.start_date);
@@ -99,14 +176,13 @@ const DescListing: React.FC<Props> = ({ id }: Props) => {
               </div>
             </div>
           </a>
-          <a
-            target="_blank"
-            rel="noreferrer noopener"
-            href="https://timesofindia.indiatimes.com/india/international-space-station-to-retire-in-2030-will-fall-into-pacific-ocean-a-year-later-nasa/articleshow/89392862.cms"
-            className="bg-green-500 hover:bg-green-600 text-white rounded-full px-8 py-2"
-          >
-            Se porter volontaire
-          </a>
+          {isVisible ? (
+            <></>
+          ) : (
+            <BtnLightBrown onClick={handleClick}>
+              Se porter volontaire
+            </BtnLightBrown>
+          )}
         </div>
       </div>
     </div>

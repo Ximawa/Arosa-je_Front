@@ -40,7 +40,7 @@ const SignupPage = () => {
       formData.append("email", email);
       formData.append("full_name", full_name);
       formData.append("id_role", id_role);
-      formData.append("hashed_password", hashedPassword);
+      formData.append("password", hashedPassword);
 
       const response = await axios.post(
         "http://127.0.0.1:8000/register",
