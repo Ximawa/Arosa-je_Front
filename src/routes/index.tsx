@@ -12,6 +12,7 @@ import ConvoListing from "../pages/ConvoListing";
 import ConvoListPage from "../pages/ConvoListPage.tsx";
 import NewEncyclopedia from "../pages/NewEncyclopedia.tsx";
 import EncyclopediaPage from "../pages/EncyclopediaPage.tsx";
+import PostEncyclopedia from "../pages/PostEncyclopedia.tsx";
 
 const Index: React.FC = () => {
   return (
@@ -34,6 +35,10 @@ const Index: React.FC = () => {
             <Route
               path="/dashboard/encyclopedia/new"
               element={<NewEncyclopedia />}
+            />
+            <Route
+              path="/dashboard/encyclopedia/:id"
+              element={<PostEncyclopedia />}
             />
           </Route>
         </Route>
