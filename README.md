@@ -45,3 +45,7 @@ mdp: demo
 Test
 username:TestParti
 mdp: demo
+
+Test
+username:TestBota
+mdp: demo
