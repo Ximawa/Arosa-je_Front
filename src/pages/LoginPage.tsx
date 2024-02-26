@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import bcrypt from "bcryptjs";
 
 import BtnNext from "../components/BtnNextDarkGreen";
 import logo from "../assets/logo_arosaje.png";
@@ -21,8 +20,8 @@ const LoginPage = () => {
       formData.append("username", username);
 
       // Hacher le mot de passe avant de l'envoyer
-      const hashedPassword = await bcrypt.hash(password, 10);
-      formData.append("password", hashedPassword);
+
+      formData.append("password", password);
 
       const response = await axios.post(
         "http://127.0.0.1:8000/login",
