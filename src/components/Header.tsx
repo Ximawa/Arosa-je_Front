@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getJWTData } from "../utils/jwtUtils";
+import logo from "../assets/logo_arosaje.png";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +31,14 @@ const Header = () => {
       <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-teal-700 lg:px-8">
         <div className="relative flex h-16 justify-between">
           <div className="relative z-10 flex px-2 lg:px-0">
-            <div className="flex flex-shrink-0 items-center">LOGO</div>
+            <div className="flex flex-shrink-0 items-center">
+              <img
+                src={logo}
+                alt="Logo de l'application"
+                width="70"
+                height="80"
+              />
+            </div>
           </div>
           <div className="relative z-10 flex items-center lg:hidden">
             <button
