@@ -32,4 +32,16 @@ Brief description of the project.
 
 2. Open your web browser and navigate to `http://localhost:5173/` to access the application.
 
-TODO: rajouter compte utilisateur ici
+## Compte utilisateurs
+
+Particulier:
+username: Parti33
+mdp: demo
+
+Botaniste
+username: Bota33
+mdp: demo
+
+Test
+username:TestParti
+mdp: demo
