@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BtnLightGreen from "../components/BtnLightGreen";
 import CardEncyclopedia from "../components/CardEncyclopedia";
+import { getJWTData } from "../utils/jwtUtils";
 
 interface CardEnclyclopdia {
   id: number;
@@ -14,6 +15,13 @@ interface CardEnclyclopdia {
 const EncyclopediaPage = () => {
   const [plantes, setPlantes] = useState<CardEnclyclopdia[]>([]);
   const navigate = useNavigate();
+  const [userRole, setUserRole] = useState<number>(1);
+
+  useEffect(() => {
+    const jwdData = getJWTData();
+
+    setUserRole(jwdData?.role);
+  }, []);
 
   const handleClickNew = () => {
     navigate("/dashboard/encyclopedia/new"); // Replace "/some-path" with the desired path to redirect to
@@ -44,7 +52,14 @@ const EncyclopediaPage = () => {
 
   return (
     <div className="container px-6 py-6">
-      <BtnLightGreen onClick={handleClickNew}>Ajouter une plante</BtnLightGreen>
+      {userRole == 1 ? (
+        <></>
+      ) : (
+        <BtnLightGreen onClick={handleClickNew}>
+          Ajouter une plante
+        </BtnLightGreen>
+      )}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
         {plantes.length === 0 ? (
           <p>Aucune plante presente dans l'encyclopedie</p>
@@ -56,7 +71,7 @@ const EncyclopediaPage = () => {
               name={item.name}
               onClick={(id: number) => HandleClick(id)}
             >
-              Voir plus
+              Voir les conseils
             </CardEncyclopedia>
           ))
         )}

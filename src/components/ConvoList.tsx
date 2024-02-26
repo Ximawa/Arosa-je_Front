@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CardListing from "./CardListing";
-import BtnLightGreen from "./BtnLightGreen";
 import { useNavigate } from "react-router-dom";
 
 interface CardListing {

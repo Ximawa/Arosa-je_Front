@@ -54,10 +54,6 @@ const DescListing: React.FC<Props> = ({ id }: Props) => {
     setProposalMsg("");
   }, []);
 
-  const handleClickConvo = () => {
-    navigate(`/dashboard/convo/${id}`);
-  };
-
   const handleClickCreate = async () => {
     const jwtToken = localStorage.getItem("jwtToken");
 
@@ -187,9 +183,6 @@ const DescListing: React.FC<Props> = ({ id }: Props) => {
               Se porter volontaire
             </BtnLightBrown>
           )}
-          <BtnLightBrown onClick={handleClickConvo}>
-            Voir la conversation
-          </BtnLightBrown>
         </div>
       </div>
     </div>

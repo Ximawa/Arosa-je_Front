@@ -11,6 +11,13 @@ const Post = () => {
   const [posts, setPosts] = useState([]);
   const [userId, setUserId] = useState(-1);
   const [messageSend, setMessageSend] = useState("");
+  const [userRole, setUserRole] = useState<number>(1);
+
+  useEffect(() => {
+    const jwdData = getJWTData();
+
+    setUserRole(jwdData?.role);
+  }, []);
 
   const onChange = (e: any) => {
     setMessageSend(e.target.value);
@@ -92,12 +99,15 @@ const Post = () => {
           )
         )
       )}
-
-      <ConversationInput
-        onChange={onChange}
-        onSubmit={(e: React.FormEvent<Element>) => handleSubmit(e)}
-        message={messageSend}
-      />
+      {userRole == 1 ? (
+        <></>
+      ) : (
+        <ConversationInput
+          onChange={onChange}
+          onSubmit={(e: React.FormEvent<Element>) => handleSubmit(e)}
+          message={messageSend}
+        />
+      )}
     </div>
   );
 };
