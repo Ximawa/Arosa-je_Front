@@ -13,6 +13,8 @@ const NewListing = () => {
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
+  const [previewURL, setPreviewURL] = useState<string | null>(null);
+
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
@@ -30,6 +32,8 @@ const NewListing = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setFile(event.target.files[0]);
+      const url = URL.createObjectURL(event.target.files[0]);
+      setPreviewURL(url);
     }
   };
 
@@ -167,6 +171,15 @@ const NewListing = () => {
           </div>
         </div>
         <div className="-mx-3 my-3 flex flex-wrap">
+          {previewURL && (
+            <div className="mx-auto">
+              <img
+                src={previewURL}
+                alt="Preview"
+                className="max-w-full h-auto"
+              />
+            </div>
+          )}
           <label
             htmlFor="dropzone-file"
             className="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-white p-6 text-center"
