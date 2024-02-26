@@ -50,7 +50,7 @@ const Listing = ({ id }: Props) => {
     <div className="container px-6 py-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
         {listing.length === 0 ? (
-          <p>No actual listing</p>
+          <p>Pas de garde en cours</p>
         ) : (
           listing.map((item) => (
             <CardListing
